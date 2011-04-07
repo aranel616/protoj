@@ -1,6 +1,6 @@
-delete window.$$$;
+delete window.$$;
 
-window.$$$ = function() {
+window.$$ = function() {
   var expression = $A(arguments).join(', ');
   return new protoj(Prototype.Selector.select(expression, document));
 };
