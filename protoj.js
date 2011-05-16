@@ -79,11 +79,15 @@ window.$$ = function() {
 protoj = function(data) {
 	data.hide = function(speed, callback) {
 		this.invoke('hide', speed, callback);
+		return this;
 	};
 	
 	data.show = function(speed, callback) {
 		this.invoke('show', speed, callback);
+		return this;
 	};
+	
+	data.click = this.click;
 	
 	return data;
 };
@@ -93,3 +97,13 @@ protoj.speeds = {
 	slow: 600,
 	_default: 400
 };
+
+protoj.prototype.click = function(callback) {
+	this.each(function(e){
+		e.observe('click', function(event){
+			callback.call(e, event);
+		})
+	})
+	
+	return this;
+}
