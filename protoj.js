@@ -76,6 +76,11 @@ window.$$ = function() {
   return new protoj(Prototype.Selector.select(expression, document));
 };
 
+var events = "blur focus click dblclick mousedown mouseup mousemove " +
+             "mouseover mouseout mouseenter mouseleave change select " +
+             "submit keydown keypress keyup";
+events = events.split(' ');
+
 protoj = function(data) {
 	data.hide = function(speed, callback) {
 		this.invoke('hide', speed, callback);
@@ -87,7 +92,9 @@ protoj = function(data) {
 		return this;
 	};
 	
-	data.click = this.click;
+	for (i = 0; i < events.length; i++) {
+		data[events[i]] = this[events[i]];
+	}
 	
 	return data;
 };
@@ -98,12 +105,14 @@ protoj.speeds = {
 	_default: 400
 };
 
-protoj.prototype.click = function(callback) {
-	this.each(function(e){
-		e.observe('click', function(event){
-			callback.call(e, event);
+events.each(function(name){
+	protoj.prototype[name] = function(callback) {
+		this.each(function(element){
+			element.observe(name, function(event){
+				callback.call(element, event);
+			})
 		})
-	})
-	
-	return this;
-}
+
+		return this;
+	}
+})

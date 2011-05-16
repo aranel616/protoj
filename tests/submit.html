@@ -1,0 +1,31 @@
+<script type="text/javascript" src="../prototype.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.3/scriptaculous.js"></script>
+<script type="text/javascript" src="../protoj.js"></script>
+
+<h2>submit</h2>
+
+<span style="float: left;">
+	<fieldset style="width: 500px;">
+		<legend>code</legend>
+<textarea id="code" style="width: 500px; height: 100px;">
+$$('form#test').submit(function(event){
+	alert(this.id);
+	alert(event.type);
+})
+</textarea>
+	</fieldset>
+	
+	<fieldset>
+		<legend>buttons</legend>
+		<form id="test">
+			<button type="submit">submit</button>
+		</form>
+	</fieldset>
+</span>
+
+<script type="text/javascript">
+	$$('form#test').submit(function(event){
+		alert(this.id);
+		alert(event.type);
+	})
+</script>

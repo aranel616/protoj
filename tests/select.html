@@ -1,0 +1,31 @@
+<script type="text/javascript" src="../prototype.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.3/scriptaculous.js"></script>
+<script type="text/javascript" src="../protoj.js"></script>
+
+<h2>select</h2>
+
+<span style="float: left;">
+	<fieldset style="width: 500px;">
+		<legend>code</legend>
+<textarea id="code" style="width: 500px; height: 100px;">
+$$('input').select(function(event){
+	alert(this.id);
+	alert(event.type);
+})
+</textarea>
+	</fieldset>
+	
+	<fieldset>
+		<legend>inputs</legend>
+		<input id="input1" value="input 1"></button>
+		<input id="input2" value="input 2"></button>
+		<input id="input3" value="input 3"></button>
+	</fieldset>
+</span>
+
+<script type="text/javascript">
+	$$('input').select(function(event){
+		alert(this.id);
+		alert(event.type);
+	})
+</script>
