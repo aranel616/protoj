@@ -34,8 +34,37 @@ Element.addMethods({
 		return element;
 	},
 	
-	show: function(element) {
-		element.setStyle({display: ''});
+	show: function(element, speed, callback) {
+		/* Allow callback to be the first and only parameter */
+		if (Object.isFunction(speed)) {
+			callback = speed;
+			speed = false;
+		}
+		
+		if (!(speed))
+			speed = 0;
+		
+		/* Set speed if value is 'fast' or 'slow' */ 
+		if (protoj.speeds[speed])
+			speed = protoj.speeds[speed];
+		else if (!Object.isNumber(speed + 0))
+			speed = protoj.speeds['_default'];
+		
+		if (speed == 0) {
+			element.setStyle({display: ''});
+			
+			if (typeof callback == 'function')
+				callback.call(element);
+		} else {
+			Effect.Appear(element, {
+				duration: speed / 1000,
+				afterFinish: function(){
+					if (typeof callback == 'function')
+						callback.call(element);
+				}
+			});
+		}
+		
 		return element;
 	}
 })
@@ -48,8 +77,13 @@ window.$$ = function() {
 };
 
 protoj = function(data) {
-	data.hide = this.hide;
-	data.show = this.show;
+	data.hide = function(speed, callback) {
+		this.invoke('hide', speed, callback);
+	};
+	
+	data.show = function(speed, callback) {
+		this.invoke('show', speed, callback);
+	};
 	
 	return data;
 };
@@ -59,44 +93,3 @@ protoj.speeds = {
 	slow: 600,
 	_default: 400
 };
-
-protoj.prototype.hide = function(speed, callback) {
-	this.invoke('hide', speed, callback);
-	return this;
-}
-
-protoj.prototype.show = function(speed, callback) {
-	/* Allow callback to be the first and only parameter */
-	if (Object.isFunction(speed)) {
-		callback = speed;
-		speed = false;
-	}
-	
-	if (!(speed))
-		speed = 0;
-	
-	/* Set speed if value is 'fast' or 'slow' */ 
-	if (protoj.speeds[speed])
-		speed = protoj.speeds[speed];
-	else if (!Object.isNumber(speed + 0))
-		speed = protoj.speeds['_default'];
-	
-	this.each(function(e){
-		if (speed == 0) {
-			e.show();
-			
-			if (typeof callback == 'function')
-				callback.call(e);
-		} else {
-			Effect.Appear(e, {
-				duration: speed / 1000,
-				afterFinish: function(){
-					if (typeof callback == 'function')
-						callback.call(e);
-				}
-			});
-		}
-	})
-	
-	return this;
-}
