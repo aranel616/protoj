@@ -5,7 +5,24 @@
 <h2>hide/show</h2>
 
 <fieldset style="float: left;">
-	<legend>actions</legend>
+	<legend>actions 1</legend>
+	<button onclick="$('div1').hide();">Hide div1</button><br>
+	<button onclick="$('div1').hide('fast');">Hide div1 (fast)</button><br>
+	<button onclick="$('div1').hide('slow');">Hide div1 (slow)</button><br>
+	<button onclick="$('div1').hide(500);">Hide div1 (500)</button><br>
+	<button onclick="$('div1').hide(function(){alert(this.id)});">Hide div1 (with callback)</button><br>
+	<button onclick="$('div1').hide('fast', function(){alert(this.id)});">Hide div1 (fast, with callback)</button><br>
+	<br>
+	<button onclick="$('div1').show();">Show div1</button><br>
+	<button onclick="$('div1').show('fast');">Show div1 (fast)</button><br>
+	<button onclick="$('div1').show('slow');">Show div1 (slow)</button><br>
+	<button onclick="$('div1').show(500);">Show div1 (500)</button><br>
+	<button onclick="$('div1').show(function(){alert(this.id)});">Show div1 (with callback)</button><br>
+	<button onclick="$('div1').show('fast', function(){alert(this.id)});">Show div1 (fast, with callback)</button><br>
+</fieldset>
+
+<fieldset style="float: left;">
+	<legend>actions 2</legend>
 	<button onclick="$$('div').hide();">Hide All</button><br>
 	<button onclick="$$('div').hide('fast');">Hide All (fast)</button><br>
 	<button onclick="$$('div').hide('slow');">Hide All (slow)</button><br>

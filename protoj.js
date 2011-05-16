@@ -1,6 +1,42 @@
 Element.addMethods({
-	live: function(element, callback) {
+	hide: function(element, speed, callback) {
+		/* Allow callback to be the first and only parameter */
+		if (Object.isFunction(speed)) {
+			callback = speed;
+			speed = false;
+		}
 		
+		if (!(speed))
+			speed = 0;
+		
+		/* Set speed if value is 'fast' or 'slow' */ 
+		if (protoj.speeds[speed])
+			speed = protoj.speeds[speed];
+		else if (!Object.isNumber(speed))
+			speed = protoj.speeds['_default'];
+		
+		
+		if (speed == 0) {
+			element.setStyle({display: 'none'});
+			
+			if (typeof callback == 'function')
+				callback.call(element);
+		} else {
+			Effect.Fade(element, {
+				duration: speed / 1000,
+				afterFinish: function(){
+					if (typeof callback == 'function')
+						callback.call(element);
+				}
+			});
+		}
+		
+		return element;
+	},
+	
+	show: function(element) {
+		element.setStyle({display: ''});
+		return element;
 	}
 })
 
@@ -25,39 +61,7 @@ protoj.speeds = {
 };
 
 protoj.prototype.hide = function(speed, callback) {
-	/* Allow callback to be the first and only parameter */
-	if (Object.isFunction(speed)) {
-		callback = speed;
-		speed = false;
-	}
-	
-	if (!(speed))
-		speed = 0;
-	
-	/* Set speed if value is 'fast' or 'slow' */ 
-	if (protoj.speeds[speed])
-		speed = protoj.speeds[speed];
-	else if (!Object.isNumber(speed))
-		speed = protoj.speeds['_default'];
-	
-	
-	this.each(function(e){
-		if (speed == 0) {
-			e.hide();
-			
-			if (typeof callback == 'function')
-				callback.call(e);
-		} else {
-			Effect.Fade(e, {
-				duration: speed / 1000,
-				afterFinish: function(){
-					if (typeof callback == 'function')
-						callback.call(e);
-				}
-			});
-		}
-	})
-	
+	this.invoke('hide', speed, callback);
 	return this;
 }
 
