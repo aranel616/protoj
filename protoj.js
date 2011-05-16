@@ -1,3 +1,9 @@
+Element.addMethods({
+	live: function(element, callback) {
+		
+	}
+})
+
 delete window.$$;
 
 window.$$ = function() {
@@ -20,14 +26,20 @@ protoj.speeds = {
 
 protoj.prototype.hide = function(speed, callback) {
 	/* Allow callback to be the first and only parameter */
-	if (Object.isFunction(speed))
+	if (Object.isFunction(speed)) {
 		callback = speed;
+		speed = false;
+	}
+	
+	if (!(speed))
+		speed = 0;
 	
 	/* Set speed if value is 'fast' or 'slow' */ 
 	if (protoj.speeds[speed])
 		speed = protoj.speeds[speed];
 	else if (!Object.isNumber(speed))
-		speed = 0;
+		speed = protoj.speeds['_default'];
+	
 	
 	this.each(function(e){
 		if (speed == 0) {
@@ -51,14 +63,19 @@ protoj.prototype.hide = function(speed, callback) {
 
 protoj.prototype.show = function(speed, callback) {
 	/* Allow callback to be the first and only parameter */
-	if (Object.isFunction(speed))
+	if (Object.isFunction(speed)) {
 		callback = speed;
+		speed = false;
+	}
+	
+	if (!(speed))
+		speed = 0;
 	
 	/* Set speed if value is 'fast' or 'slow' */ 
 	if (protoj.speeds[speed])
 		speed = protoj.speeds[speed];
-	else if (!Object.isNumber(speed))
-		speed = 0;
+	else if (!Object.isNumber(speed + 0))
+		speed = protoj.speeds['_default'];
 	
 	this.each(function(e){
 		if (speed == 0) {

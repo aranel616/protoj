@@ -10,8 +10,8 @@
 	<button onclick="$$('div').hide('fast');">Hide All (fast)</button><br>
 	<button onclick="$$('div').hide('slow');">Hide All (slow)</button><br>
 	<button onclick="$$('div').hide(500);">Hide All (500)</button><br>
-	<button onclick="$$('div').hide(function(){alert('done')});">Hide All (with callback)</button><br>
-	<button onclick="$$('div').hide('fast', function(){alert('done')});">Hide All (fast, with callback)</button><br>
+	<button onclick="$$('div').hide(function(){alert(this.id)});">Hide All (with callback)</button><br>
+	<button onclick="$$('div').hide('fast', function(){alert(this.id)});">Hide All (fast, with callback)</button><br>
 	<br>
 	<button onclick="$$('div').show();">Show All</button><br>
 	<button onclick="$$('div').show('fast');">Show All (fast)</button><br>
