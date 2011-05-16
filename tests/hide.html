@@ -1,0 +1,44 @@
+<script type="text/javascript" src="../prototype.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.3/scriptaculous.js"></script>
+<script type="text/javascript" src="../protoj.js"></script>
+
+<h2>hide/show</h2>
+
+<fieldset style="float: left;">
+	<legend>actions</legend>
+	<button onclick="$$('div').hide();">Hide All</button><br>
+	<button onclick="$$('div').hide('fast');">Hide All (fast)</button><br>
+	<button onclick="$$('div').hide('slow');">Hide All (slow)</button><br>
+	<button onclick="$$('div').hide(500);">Hide All (500)</button><br>
+	<button onclick="$$('div').hide(function(){alert('done')});">Hide All (with callback)</button><br>
+	<button onclick="$$('div').hide('fast', function(){alert('done')});">Hide All (fast, with callback)</button><br>
+	<br>
+	<button onclick="$$('div').show();">Show All</button><br>
+	<button onclick="$$('div').show('fast');">Show All (fast)</button><br>
+	<button onclick="$$('div').show('slow');">Show All (slow)</button><br>
+	<button onclick="$$('div').show(500);">Show All (500)</button><br>
+	<button onclick="$$('div').show(function(){alert(this.id)});">Show All (with callback)</button><br>
+	<button onclick="$$('div').show('fast', function(){alert(this.id)});">Show All (fast, with callback)</button><br>
+</fieldset>
+
+<span style="float: left;">
+	<fieldset style="width: 500px;">
+		<legend>code</legend>
+		<textarea id="code" style="width: 500px; height: 100px;"></textarea>
+	</fieldset>
+	
+	<fieldset>
+		<legend>divs</legend>
+		<div id="div1">div 1</div>
+		<div id="div2">div 2</div>
+		<div id="div3">div 3</div>
+	</fieldset>
+</span>
+
+<script type="text/javascript">
+	$$('button').each(function(e){
+		e.observe('click', function(){
+			$('code').innerHTML = this.onclick;
+		});
+	})
+</script>

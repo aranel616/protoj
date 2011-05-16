@@ -27,7 +27,7 @@ protoj.prototype.hide = function(speed, callback) {
 	if (protoj.speeds[speed])
 		speed = protoj.speeds[speed];
 	else if (!Object.isNumber(speed))
-		speed = protoj.speeds['_default'];
+		speed = 0;
 	
 	this.each(function(e){
 		if (speed == 0) {
@@ -58,7 +58,7 @@ protoj.prototype.show = function(speed, callback) {
 	if (protoj.speeds[speed])
 		speed = protoj.speeds[speed];
 	else if (!Object.isNumber(speed))
-		speed = protoj.speeds['_default'];
+		speed = 0;
 	
 	this.each(function(e){
 		if (speed == 0) {
