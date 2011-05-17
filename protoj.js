@@ -69,8 +69,6 @@ Element.addMethods({
 	}
 })
 
-delete window.$$;
-
 window.$$ = function() {
   var expression = $A(arguments).join(', ');
   return new protoj(Prototype.Selector.select(expression, document));
