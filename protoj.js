@@ -106,6 +106,8 @@ protoj = function(data) {
 			return data[0].html();
 		else
 			this.invoke('html', htmlString);
+		
+		return this;
 	}
 	
 	for (i = 0; i < events.length; i++) {
