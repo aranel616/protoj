@@ -66,6 +66,15 @@ Element.addMethods({
 		}
 		
 		return element;
+	},
+	
+	html: function(element, htmlString) {
+		if (htmlString)
+			element.innerHTML = htmlString;
+		else
+			return element.innerHTML;
+		
+		return element;
 	}
 })
 
@@ -91,6 +100,13 @@ protoj = function(data) {
 		this.invoke('show', speed, callback);
 		return this;
 	};
+	
+	data.html = function(htmlString) {
+		if (!htmlString)
+			return data[0].html();
+		else
+			this.invoke('html', htmlString);
+	}
 	
 	for (i = 0; i < events.length; i++) {
 		data[events[i]] = protoj.prototype[events[i]];
