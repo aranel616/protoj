@@ -1,0 +1,44 @@
+<script type="text/javascript" src="../prototype.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.3/scriptaculous.js"></script>
+<script type="text/javascript" src="../protoj.js"></script>
+
+<style>
+button {
+	float: left;
+}
+</style>
+
+<h2>live</h2>
+
+<span style="float: left;">
+	<fieldset style="width: 500px;">
+		<legend>code</legend>
+<textarea id="code" style="width: 500px; height: 100px;">
+$$('button').live('click', function(event){
+	alert(this.id);
+	alert(event.type);
+});
+</textarea>
+	</fieldset>
+
+	<fieldset style="float: left; width: 210px;" id="buttons">
+		<legend>inputs</legend>
+		<button id="button1">button 1</button>
+		<button id="button2">button 2</button>
+		<button id="button3">button 3</button>
+	</fieldset>
+	
+	<fieldset style="float: left;">
+		<legend>actions</legend>
+		<a href="#" onclick="$('buttons').innerHTML+='<button id='+newId+'>button '+newId+'</button>';newId++;return false;">add button</a>
+	</fieldset>
+</span>
+
+<script type="text/javascript">
+	$$('button').live('click', function(event){
+		alert(this.id);
+		alert(event.type);
+	});
+	
+	newId = 4;
+</script>

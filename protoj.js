@@ -71,7 +71,9 @@ Element.addMethods({
 
 window.$$ = function() {
   var expression = $A(arguments).join(', ');
-  return new protoj(Prototype.Selector.select(expression, document));
+  obj = protoj(Prototype.Selector.select(expression, document));
+  obj.selector = expression;
+  return obj;
 };
 
 var events = "blur focus click dblclick mousedown mouseup mousemove " +
@@ -91,7 +93,20 @@ protoj = function(data) {
 	};
 	
 	for (i = 0; i < events.length; i++) {
-		data[events[i]] = this[events[i]];
+		data[events[i]] = protoj.prototype[events[i]];
+	}
+	
+	data.live = function(eventType, callback) {
+		var selector = this.selector;
+
+		document.observe(eventType, function(event, element) {
+			if (element = event.findElement(selector)) {
+				callback.call(element, event);
+				event.stop();
+			}
+		});
+
+		return this;
 	}
 	
 	return data;
