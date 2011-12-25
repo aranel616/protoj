@@ -108,7 +108,6 @@ protoj = function(data) {
 	};
 
 	data.html = function(htmlString) {
-        console.log(this);
 		if (!htmlString)
 			return data[0].html();
 		else
