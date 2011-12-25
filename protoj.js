@@ -5,20 +5,20 @@ Element.addMethods({
 			callback = speed;
 			speed = false;
 		}
-		
+
 		if (!(speed))
 			speed = 0;
-		
-		/* Set speed if value is 'fast' or 'slow' */ 
+
+		/* Set speed if value is 'fast' or 'slow' */
 		if (protoj.speeds[speed])
 			speed = protoj.speeds[speed];
 		else if (!Object.isNumber(speed))
 			speed = protoj.speeds['_default'];
-		
-		
+
+
 		if (speed == 0) {
 			element.setStyle({display: 'none'});
-			
+
 			if (typeof callback == 'function')
 				callback.call(element);
 		} else {
@@ -30,29 +30,29 @@ Element.addMethods({
 				}
 			});
 		}
-		
+
 		return element;
 	},
-	
+
 	show: function(element, speed, callback) {
 		/* Allow callback to be the first and only parameter */
 		if (Object.isFunction(speed)) {
 			callback = speed;
 			speed = false;
 		}
-		
+
 		if (!(speed))
 			speed = 0;
-		
-		/* Set speed if value is 'fast' or 'slow' */ 
+
+		/* Set speed if value is 'fast' or 'slow' */
 		if (protoj.speeds[speed])
 			speed = protoj.speeds[speed];
 		else if (!Object.isNumber(speed + 0))
 			speed = protoj.speeds['_default'];
-		
+
 		if (speed == 0) {
 			element.setStyle({display: ''});
-			
+
 			if (typeof callback == 'function')
 				callback.call(element);
 		} else {
@@ -64,16 +64,22 @@ Element.addMethods({
 				}
 			});
 		}
-		
+
 		return element;
 	},
-	
-	html: function(element, htmlString) {
-		if (htmlString)
-			element.innerHTML = htmlString;
-		else
+
+	html: function(element, htmlString, index) {
+        if (typeof index == 'undefined')
+            index = 0;
+
+		if (htmlString) {
+            if (typeof htmlString == 'function')
+                element.innerHTML = htmlString.call(element, index, element.innerHTML);
+            else
+			    element.innerHTML = htmlString;
+		} else
 			return element.innerHTML;
-		
+
 		return element;
 	}
 })
@@ -95,25 +101,28 @@ protoj = function(data) {
 		this.invoke('hide', speed, callback);
 		return this;
 	};
-	
+
 	data.show = function(speed, callback) {
 		this.invoke('show', speed, callback);
 		return this;
 	};
-	
+
 	data.html = function(htmlString) {
+        console.log(this);
 		if (!htmlString)
 			return data[0].html();
 		else
-			this.invoke('html', htmlString);
-		
+			this.each(function(element, index){
+                element.html(htmlString, index);
+            });
+
 		return this;
 	}
-	
+
 	for (i = 0; i < events.length; i++) {
 		data[events[i]] = protoj.prototype[events[i]];
 	}
-	
+
 	data.live = function(eventType, callback) {
 		var selector = this.selector;
 
@@ -126,7 +135,7 @@ protoj = function(data) {
 
 		return this;
 	}
-	
+
 	return data;
 };
 

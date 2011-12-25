@@ -1,0 +1,74 @@
+<script type="text/javascript" src="../prototype.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.3/scriptaculous.js"></script>
+<script type="text/javascript" src="../protoj.js"></script>
+
+<h2>html</h2>
+
+<span style="float: left;">
+    <fieldset style="width: 500px;">
+		<legend>code</legend>
+<textarea id="code" style="width: 500px; height: 100px;">
+    $$('#gethtml').click(function(event){
+		alert($('test').html());
+	})
+
+    $$('#sethtml').click(function(event){
+        $('test').html(new Date().getTime());
+    })
+
+    $$('#gethtmlc').click(function(event){
+        alert($$('.test').html());
+    })
+
+    $$('#sethtmlc').click(function(event){
+        $$('.test').html(new Date().getTime());
+    })
+
+    $$('#sethtmlf').click(function(event){
+        $$('#test').html(function(index, oldhtml){
+            return index + ': <b>' + oldhtml + '</b>';
+        });
+    })
+</textarea>
+	</fieldset>
+
+	<fieldset>
+		<legend>test area</legend>
+		<div id="test" class='test'>Hello World</div><br>
+        <div class='test'></div><br>
+        <div class='test'></div><br>
+	</fieldset>
+
+    <fieldset>
+        <legend>actions</legend>
+        <input type="submit" id="sethtml" value="Set html">
+        <input type="submit" id="gethtml" value="Get html">
+        <input type="submit" id="sethtmlc" value="Set html ($$)">
+        <input type="submit" id="gethtmlc" value="Get html ($$)">
+        <input type="submit" id="sethtmlf" value="Set html (function)">
+    </fieldset>
+</span>
+
+<script type="text/javascript">
+	$$('#gethtml').click(function(event){
+		alert($('test').html());
+	})
+
+    $$('#sethtml').click(function(event){
+        $('test').html(new Date().getTime());
+    })
+
+    $$('#gethtmlc').click(function(event){
+        alert($$('.test').html());
+    })
+
+    $$('#sethtmlc').click(function(event){
+        $$('.test').html(new Date().getTime());
+    })
+
+    $$('#sethtmlf').click(function(event){
+        $('test').html(function(index, oldhtml){
+            return index + ': <b>' + oldhtml + '</b>';
+        });
+    })
+</script>
