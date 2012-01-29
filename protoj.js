@@ -75,6 +75,25 @@ Element.addMethods({
 			return element.innerHTML;
 		
 		return element;
+	},
+	
+	attr: function(element, attrName, value) {
+		if (typeof attrName === 'object') {
+			// attrName is map of attribute-value pairs to set
+			$H(attrName).each(function(pair) {
+				element[pair.key] = pair.value;
+			});
+		}
+		else if (value === null)
+			return element[attrName];
+		else if (typeof value === 'function') {
+			element[attrName] = value();
+			return element;
+		}
+		else {
+			element[attrName] = value;
+			return element;
+		}
 	}
 })
 
@@ -108,6 +127,25 @@ protoj = function(data) {
 			this.invoke('html', htmlString);
 		
 		return this;
+	}
+	
+	data.attr = function(attrName, value) {
+		if (typeof attrName === 'object') {
+			// attrName is map of attribute-value pairs to set
+			$H(attrName).each(function(pair) {
+				this[pair.key] = pair.value;
+			});
+		}
+		else if (value === null)
+			return this[attrName];
+		else if (typeof value === 'function') {
+			this[attrName] = value();
+			return this;
+		}
+		else {
+			this[attrName] = value;
+			return this;
+		}
 	}
 	
 	for (i = 0; i < events.length; i++) {
