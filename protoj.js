@@ -84,9 +84,10 @@ Element.addMethods({
 				element[pair.key] = pair.value;
 			});
 		}
-		else if (typeof value === "undefined")
+		else if (typeof value === "undefined") {
 			// Return attribute value
 			return element[attrName];
+		}
 		else if (typeof value === 'function') {
 			// value is a function
 			element[attrName] = value();
@@ -138,9 +139,10 @@ protoj = function(data) {
 				this[pair.key] = pair.value;
 			});
 		}
-		else if (typeof value === "undefined")
+		else if (typeof value === "undefined") {
 			// Return attribute value
 			return this[attrName];
+		}
 		else if (typeof value === 'function') {
 			// value is a function
 			this[attrName] = value();
